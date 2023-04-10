@@ -1,0 +1,24 @@
+--This is a Bike Store sales database I created.  
+CREATE TABLE bikestore (id INTEGER PRIMARY KEY, bikename TEXT, colour TEXT, price INTEGER, items_sold INTEGER);
+INSERT INTO bikestore VALUES (1, "Minibike", "Green", 89, 14);
+INSERT INTO bikestore VALUES (2, "Nanobike", "Yellow", 75, 2);
+INSERT INTO bikestore VALUES (3, "Superbike", "Red", 113, 23);
+INSERT INTO bikestore VALUES (4, "Megabike", "Green", 200, 7);
+INSERT INTO bikestore VALUES (5, "Lightbike", "Yellow", 55, 9);
+INSERT INTO bikestore VALUES (6, "Gigabike", "Black", 300, 11);
+INSERT INTO bikestore VALUES (7, "Terabike", "White", 350, 2);
+INSERT INTO bikestore VALUES (8, "Spikebike", "Grey", 99, 13);
+INSERT INTO bikestore VALUES (9, "Electrobike", "Yellow", 9, 14);
+INSERT INTO bikestore VALUES (10, "Tinybike", "Red", 99, 4);
+INSERT INTO bikestore VALUES (11, "Giantbike", "Blue", 350, 22);
+INSERT INTO bikestore VALUES (12, "Stretchbike", "Brown", 160, 13);
+INSERT INTO bikestore VALUES (13, "Riverbike", "Blue", 112, 8);
+INSERT INTO bikestore VALUES (14, "Mudbike", "Brown", 230, 18);
+INSERT INTO bikestore VALUES (15, "Firebike", "Red", 280, 20);
+
+--This query orders items by their price, 
+SELECT * FROM bikestore ORDER BY price;
+--This query displays the items (from highest to lowest) in terms of total sales income 
+SELECT bikename FROM bikestore ORDER BY price * items_sold DESC;
+--This query shows how many items were sold in total
+SELECT SUM(items_sold) FROM bikestore
