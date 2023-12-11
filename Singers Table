@@ -1,0 +1,36 @@
+CREATE TABLE singers (id INTEGER,
+    fullname TEXT,
+    age INTEGER,
+    famous_song TEXT, hometown TEXT);
+
+INSERT INTO singers (id, fullname, age, famous_song, hometown) VALUES (1, 'Ed Sheeran', 32, 'Shape of You', 'Halifax');
+INSERT INTO singers (id, fullname, age, famous_song, hometown) VALUES (2, 'Burna Boy', 32, 'Last Last', 'Port Harcourt');
+INSERT INTO singers (id, fullname, age, famous_song, hometown) VALUES (3, 'Jacob Collier', 29, 'Hideaway', 'London');
+INSERT INTO singers (id, fullname, age, famous_song, hometown) VALUES (4, 'Billie Eilish', 21, 'Bad Guy', 'Los Angeles');
+INSERT INTO singers (id, fullname, age, famous_song, hometown) VALUES (5, 'Bibio', 45, 'Curls', 'West Midlands');
+
+CREATE TABLE singers_favefood (id INTEGER,
+    food TEXT);
+
+INSERT INTO singers_favefood (id, food) VALUES (1, 'Nando''s Chicken');
+INSERT INTO singers_favefood (id, food) VALUES (2, 'Fish Stew');
+INSERT INTO singers_favefood (id, food) VALUES (3, 'Pasta');
+INSERT INTO singers_favefood (id, food) VALUES (4, 'Mashed Potatoes');
+INSERT INTO singers_favefood (id, food) VALUES (5, "");
+
+CREATE TABLE singers_country (id INTEGER,
+    country TEXT);
+
+INSERT INTO singers_country (id, country) VALUES (1, 'England');
+INSERT INTO singers_country (id, country) VALUES (2, 'Nigeria');
+INSERT INTO singers_country (id, country) VALUES (3, 'England');
+INSERT INTO singers_country (id, country) VALUES (4, 'USA');
+INSERT INTO singers_country (id, country) VALUES (5, 'England');
+
+SELECT * FROM singers;
+
+SELECT singers.fullname, singers_favefood.food AS favourite_food FROM singers LEFT JOIN singers_favefood ON singers.id=singers_favefood.id GROUP BY fullname;
+
+SELECT singers_favefood.food, singers_country.country FROM singers_favefood JOIN singers_country ON singers_favefood.id = singers_country.id;
+
+SELECT singers.hometown, singers_country.country, singers.fullname FROM singers_country JOIN singers ON singers_country.id = singers.id;
