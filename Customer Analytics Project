@@ -33,29 +33,29 @@ SELECT Product, SUM(Quantity) as 'Total Sold' FROM BIT_DB.FebSales WHERE locatio
 
 //Question #8
 Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
-
+SELECT distinct location, count(orderID) FROM BIT_DB.JanSales WHERE location like '%NY%' AND length(orderID) = 6 AND orderID <> 'Order ID' GROUP by location HAVING count(orderID) > 2;
 //Question #9
 How many of each type of headphone were sold in February?
-SELECT distinct location, count(orderID) FROM BIT_DB.JanSales WHERE location like '%NY%' AND length(orderID) = 6 AND orderID <> 'Order ID' GROUP by location HAVING count(orderID) > 2;
+SELECT distinct product, SUM(Quantity) FROM BIT_DB.FebSales WHERE Product LIKE '%Headphone%' GROUP BY product;
 
 //Question #10
 What was the average amount spent per account in February? (Hints: For this question, we want the average amount spent / number of accounts, not the amount spent by each account. To multiply, you can use the * symbol, and to divide, you can use the / symbol.)
-SELECT distinct product, SUM(Quantity) FROM BIT_DB.FebSales WHERE Product LIKE '%Headphone%' GROUP BY product;
+SELECT SUM(Quantity*price) AS 'Spend', COUNT(customers.acctnum) AS 'Total Unique Act Numbers', ROUND(SUM(Quantity*price)/COUNT((customers.acctnum)), 2) AS 'Final Average' FROM BIT_DB.FebSales JOIN customers ON FebSales.orderID = customers.order_id WHERE LENGTH(FebSales.orderID) = 6 AND FebSales.orderID <> 'Order ID';
 
 //Question #11
 What was the average quantity of products purchased per account in February? (Hint: just like question 3, we want the overall average, not the average for each account individually).
-SELECT SUM(Quantity*price) AS 'Spend', COUNT(customers.acctnum) AS 'Total Unique Act Numbers', ROUND(SUM(Quantity*price)/COUNT((customers.acctnum)), 2) AS 'Final Average' FROM BIT_DB.FebSales JOIN customers ON FebSales.orderID = customers.order_id WHERE LENGTH(FebSales.orderID) = 6 AND FebSales.orderID <> 'Order ID';
+SELECT (ROUND(SUM(Quantity)/COUNT(customers.acctnum), 2)) AS 'Final Average' FROM BIT_DB.FebSales JOIN customers ON FebSales.orderID = customers.order_id WHERE LENGTH(FebSales.orderID) = 6 AND FebSales.orderID <> 'Order ID';
 
 //Question #12
 Which product brought in the most revenue in January and how much revenue did it bring in total?
-SELECT (ROUND(SUM(Quantity)/COUNT(customers.acctnum), 2)) AS 'Final Average' FROM BIT_DB.FebSales JOIN customers ON FebSales.orderID = customers.order_id WHERE LENGTH(FebSales.orderID) = 6 AND FebSales.orderID <> 'Order ID';
-
-
-
-
-
-
-
-
 SELECT SUM(Quantity*Price), Product FROM BIT_DB.JanSales GROUP BY Product ORDER BY SUM(Quantity*Price) DESC LIMIT 1;
+
+
+
+
+
+
+
+
+
 
