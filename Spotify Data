@@ -1,0 +1,36 @@
+SELECT * FROM Spotifydata;
+
+//finding average popularity of Spotify songs listed
+
+SELECT AVG(popularity) FROM Spotifydata;
+
+//trying to prove that average danceability, energy and/or loudness is higher for popular songs - actually the converse!
+
+SELECT AVG(danceability), AVG(energy), AVG(loudness) FROM Spotifydata WHERE popularity > 90;
+
+SELECT AVG(danceability), AVG(energy), AVG(loudness) FROM Spotifydata
+
+//no visible correlation between tempo, duration and popularity
+
+SELECT tempo, popularity FROM Spotifydata ORDER BY popularity desc;
+
+SELECT duration_ms, popularity FROM Spotifydata ORDER BY duration_ms asc;
+
+//The Top 5 artists in the top 50 make up 30% of the top 50 songs
+
+//Identify the top 5 artists with the highest number of songs
+SELECT artist_name, COUNT(artist_name) AS number_of_songs
+FROM Spotifydata
+GROUP BY artist_name
+ORDER BY number_of_songs DESC
+LIMIT 5;
+
+//Calculate the total number of songs for the top 5 artists
+SELECT SUM(number_of_songs) AS total_songs
+FROM (
+    SELECT artist_name, COUNT(artist_name) AS number_of_songs
+    FROM Spotifydata
+    GROUP BY artist_name
+    ORDER BY number_of_songs DESC
+    LIMIT 5
+) AS top_artists;
